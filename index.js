@@ -135,14 +135,23 @@ promise = new Promise((resolve, reject) => {
     // setTimeout(() => {
     //     resolve();
     // },3000)
-    var request = new XHTMLRequest();
-    // ajaxリクエストをする
-    request.onload = () => {
-        resolve();
-    }
+    // var request = new XHTMLRequest();
+    // // ajaxリクエストをする
+    // request.onload = () => {
+    //     resolve();
+    // }
  });
 // 成功
 promise
     .then(() => console.log('処理が完了しました'))
     .then(() => console.log('ここも実行されます'))
-    .catch(()=> console.log('問題発生'))
+    .catch(() => console.log('問題発生'))
+    
+url = "https://jsonplaceholder.typicode.com/posts/";
+// 成功はthen
+fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    // 異常なステータスコード404の場合はthenに入る
+    // ネットワーク失敗であればcatch
+    .catch(error =>console.log('問題発生',error))
